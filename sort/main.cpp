@@ -91,6 +91,30 @@ void quickSort(int* arr, int l, int r) {
     }
 }
 
+/*
+* 插入排序
+* 数组的前部分是有序的，后部分是无序的。对无序部分的数，为他们找到在有序部分的位置插入进去
+* 时间复杂度：O(n^2), 空间复杂度：O(1), 稳定排序
+*/
+void insertSort(int* arr, int len) {
+    // i 之前部分有序, 之后部分无序
+    for (int i = 1; i < len; i++) {
+        int x = arr[i]; // 待排元素
+
+        // 寻找合适位置
+        int j;
+        for (j = i - 1; j >= 0; j--) {
+            if (x <= arr[j]) {
+                arr[j + 1] = arr[j];
+            }
+            else {
+                break;
+            }
+        }
+        // 将待排元素插入
+        arr[j + 1] = x;
+    }
+}
 
 
 int main() {
@@ -111,4 +135,9 @@ int main() {
     std::cout << "快速排序\n";
     quickSort(arr, 0, len - 1);
     printarr(arr, len);
+
+    std::cout << "插入排序\n";
+    insertSort(arr, len);
+    printarr(arr, len);
+
 }
