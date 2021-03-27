@@ -53,8 +53,48 @@ void bubbleSort(int* arr, int len) {
 }
 
 
+/*
+* 快速排序, 递归算法
+* 每次以一个数为基准, 将小于它的放在左边, 比大于等于它的放在右边; 递归地对基准两边执行相同操作.
+* 时间复杂度：O(nlogn), 空间复杂度：O(logn), 非稳定排序
+*/
+void quickSort(int* arr, int l, int r) {
+    if (l < r) {
+        int i = l;
+        int j = r;
+        int pivot = arr[l]; // 基准
+
+        while (i < j) {
+            // 从右向左找第一个小于pivot的数
+            while (i < j && pivot < arr[j]) {
+                j--;
+            }
+            if (i < j) {
+                arr[i] = arr[j];
+                i++;
+            }
+
+            // 从左向右找第一个大于等于x的数
+            while (i < j && pivot >= arr[i]) {
+                i++;
+            }
+            if (i < j) {
+                arr[j] = arr[i];
+                j--;
+            }
+        }
+        arr[i] = pivot;
+
+        // 递归调用
+        quickSort(arr, l, i - 1);
+        quickSort(arr, i + 1, r);
+    }
+}
+
+
+
 int main() {
-    int arr[] = { 3, 2, 6, 8, 5, 1, 9, 7 };
+    int arr[] = { 10, 12, 4, 5, 3, 44, 54, 78, 1 };
     int len = sizeof(arr) / sizeof(arr[0]);
 
     std::cout << "原数组\n";
@@ -68,4 +108,7 @@ int main() {
     bubbleSort(arr, len);
     printarr(arr, len);
 
+    std::cout << "快速排序\n";
+    quickSort(arr, 0, len - 1);
+    printarr(arr, len);
 }
