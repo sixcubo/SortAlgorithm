@@ -15,10 +15,13 @@ void printarr(int* arr, int len) {
     std::cout << std::endl;
 }
 
+
+/// 以下均为升序排序
+
 /*
 * 选择排序
 * 遍历 len-1 次, 每次选择出最小的元素放到前面
-* 稳定, 时间复杂度O(n^2), 空间复杂度：O(1)
+* 时间复杂度O(n^2), 空间复杂度：O(1), 稳定
 */
 void selectSort(int *arr, int len) {
     for (int i = 0; i < len-1; i++) {
@@ -34,6 +37,21 @@ void selectSort(int *arr, int len) {
     }
 }
 
+/*
+* 冒泡排序
+* 两两比较, 小的在前, 大的在后
+* 时间复杂度：O(n^2), 空间复杂度：O(1), 稳定排序
+*/
+void bubbleSort(int* arr, int len) {
+    for (int i = 0; i < len - 1; i++) {
+        for (int j = i + 1; j < len; j++) {
+            if (arr[i] > arr[j]) {
+                swap(arr[i], arr[j]);
+            }
+        }
+    }
+}
+
 
 int main() {
     int arr[] = { 3, 2, 6, 8, 5, 1, 9, 7 };
@@ -42,8 +60,12 @@ int main() {
     std::cout << "原数组\n";
     printarr(arr, len);
 
-    selectSort(arr, len);
     std::cout << "选择排序\n";
+    selectSort(arr, len);
+    printarr(arr, len);
+
+    std::cout << "冒泡排序\n";
+    bubbleSort(arr, len);
     printarr(arr, len);
 
 }
